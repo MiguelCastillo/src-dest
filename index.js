@@ -13,7 +13,7 @@ function File(options, cwd) {
   if (!options) {
     options = {};
   }
-  else if (types.isString(options)) {
+  else if (types.isString(options) || types.isArray(options)) {
     options = {
       src: options
     };
@@ -25,7 +25,7 @@ function File(options, cwd) {
   this.src = [];
   this.dest = null;
   this.cwd = cwd;
-  configurator.configure(this, parseOptions(options));
+  configurator.configure(this, options);
 }
 
 File.prototype.setSrc = function(files) {
@@ -58,19 +58,6 @@ function dest(file, cwd) {
   return types.isString(file) ?
     path.isAbsolute(file) ? file : path.join(cwd, file) :
     file;
-}
-
-function parseOptions(options) {
-  if (!options) {
-    options = {};
-  }
-  else if (!types.isPlainObject(options)) {
-    options = {
-      src: options
-    };
-  }
-
-  return options;
 }
 
 module.exports = File;
