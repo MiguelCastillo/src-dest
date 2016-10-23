@@ -1,6 +1,6 @@
 # src-dest
 
-Helper utility for managing src and dest file paths. File instances contain an array of `src` file paths and a single `dest` file path; all relative file paths are resolved the full paths.
+Helper utility for managing src and dest file paths. File instances contain an array of `src` file paths and a single `dest` file path; all relative file paths are resolved to full paths.
 
 > This is a trimmed down version of Grunt files.
 
