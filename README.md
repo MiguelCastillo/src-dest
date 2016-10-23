@@ -1,5 +1,7 @@
 # src-dest
 
+[![Build Status](https://travis-ci.org/MiguelCastillo/src-dest.svg?branch=master)](https://travis-ci.org/MiguelCastillo/src-dest)
+
 Helper utility for managing src and dest file paths. File instances contain an array of `src` file paths and a single `dest` file path; all paths are full paths.
 
 > This is a trimmed down version of Grunt files.
