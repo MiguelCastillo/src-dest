@@ -97,5 +97,5 @@ Method to configure `dest` file path.
 
 ## File.list(options, cwd) : File[]
 
-Helper static method to create a list of file instances from a list of file options. Options are just an array of configurations used to build a list of File instances.
+Static helper method to create a list of file instances from a list of file options. Options are just an array of configurations used to build a list of File instances.
 
