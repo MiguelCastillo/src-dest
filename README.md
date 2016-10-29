@@ -78,6 +78,7 @@ Constructor to create file instances. A file instance contains an `src` property
 - **`options`** { string | string[] | { src: string[], dest: string } } - Options can be a string or an array of strings. These strings are configured as the `src` file paths. Options can alternatively be an object with `src` and `dest`.
   - **`options.src`** { string | string[] } - Source file paths. These can be globs.
   - **`options.dest`** { string } - Destination file path.
+  - **`options.resolve`** { boolean } - Flag to disable glob resolution.
 - **`cwd`** { string } - Current working directory to resolve `src` files relative to. If one isn't provided then `process.cwd()` is used.
 
 > `src` file paths can be globs and are resolved relative to process.cwd() or `cwd` if that is provided. `dest` files are always resolved relative to process.cwd().
