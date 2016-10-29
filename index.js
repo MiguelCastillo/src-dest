@@ -25,11 +25,12 @@ function File(options, cwd) {
   this.src = [];
   this.dest = null;
   this.cwd = cwd;
+  this.resolve = options.resolve;
   configurator.configure(this, options);
 }
 
 File.prototype.setSrc = function(files) {
-  this.src = src(files, this.cwd);
+  this.src = src(files, this.cwd, this.resolve);
   return this;
 };
 
@@ -44,9 +45,9 @@ function list(files, cwd) {
   });
 }
 
-function src(files, cwd) {
+function src(files, cwd, resolve) {
   return utils.toArray(files).reduce(function(result, file) {
-    var globResult = types.isString(file) ?
+    var globResult = types.isString(file) && resolve !== false ?
       glob.sync(file, { cwd: cwd, realpath: true }) :
       [file];
 
