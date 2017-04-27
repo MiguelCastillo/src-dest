@@ -1,5 +1,9 @@
 import { expect } from "chai";
+import Chance from "chance";
 import File from "../../index";
+import path from "path";
+
+var chance = new Chance();
 
 describe("File unit test", function() {
   var act, result, options;
@@ -144,6 +148,42 @@ describe("File unit test", function() {
 
     it("then the current directory contains src-dest", function() {
       expect(result.cwd).to.contain("/src-dest");
+    });
+  });
+
+  describe("When creating a File with a CWD", function() {
+    describe("And cwd is an absolute path", function() {
+      var cwd;
+
+      beforeEach(function() {
+        cwd = "/" + chance.string();
+        options = {
+          cwd: cwd
+        };
+
+        act();
+      });
+
+      it("then file.cwd matches the configured cwd", function() {
+        expect(result.cwd).to.equal(cwd);
+      });
+    });
+
+    describe("And cwd is a realtive path", function() {
+      var cwd;
+
+      beforeEach(function() {
+        cwd = "./" + chance.string();
+        options = {
+          cwd: cwd
+        };
+
+        act();
+      });
+
+      it("then file.cwd has process.cwd() as the base", function() {
+        expect(result.cwd).to.equal(path.join(process.cwd(), cwd));
+      });
     });
   });
 });

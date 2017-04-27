@@ -3,7 +3,7 @@ var path = require("path");
 var types = require("dis-isa");
 var utils = require("belty");
 var configurator = require("setopt")();
-var _cwd = process.cwd();
+var processCwd = process.cwd();
 
 function File(options, cwd) {
   if (!(this instanceof File)) {
@@ -19,8 +19,8 @@ function File(options, cwd) {
     };
   }
 
-  cwd = options.cwd || cwd || _cwd;
-  cwd = _cwd === cwd || path.isAbsolute(cwd) ? cwd : path.join(_cwd, cwd);
+  cwd = options.cwd || cwd;
+  cwd = cwd && path.isAbsolute(cwd) ? cwd : path.join(processCwd, cwd || "");
 
   this.src = [];
   this.dest = null;
@@ -35,7 +35,7 @@ File.prototype.setSrc = function(files) {
 };
 
 File.prototype.setDest = function(file) {
-  this.dest = dest(file, _cwd);
+  this.dest = dest(file, processCwd);
   return this;
 };
 
