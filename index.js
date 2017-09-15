@@ -51,6 +51,10 @@ function src(files, cwd, resolve) {
       glob.sync(file, { cwd: cwd, realpath: true }) :
       [file];
 
+    if (!globResult.length) {
+      throw new Error("File(s) not found: " + file);
+    }
+
     return result.concat(globResult);
   }, []);
 }
