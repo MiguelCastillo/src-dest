@@ -10,6 +10,11 @@ function File(options, cwd) {
     return new File(options);
   }
 
+  if (options instanceof File) {
+    Object.assign(this, options);
+    return this;
+  }
+
   if (!options) {
     options = {};
   }
