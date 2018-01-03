@@ -79,9 +79,25 @@ Constructor to create file instances. A file instance contains an `src` property
   - **`options.src`** { string | string[] } - Source file paths. These can be globs.
   - **`options.dest`** { string } - Destination file path.
   - **`options.resolve`** { boolean } - Flag to disable glob resolution.
+  - **`options.path`** { string } - String path. Does not support glob resolution and so it is not affected by `resolve` flag.
+  - **`options.contents`** { string | Buffer } - File contents.
 - **`cwd`** { string } - Current working directory to resolve `src` files relative to. If one isn't provided then `process.cwd()` is used.
 
 > `src` file paths can be globs and are resolved relative to process.cwd() or `cwd` if that is provided. `dest` files are always resolved relative to process.cwd().
+
+
+## setPath(path) : File
+
+Method to configure the file `path`. `path` does not support glob resolution. For that, please use the `src` field instead. Furthermore, this is completely independent from `src`.
+
+- **`path`** { string } - File path to configure. Glob paths won't be resolved.
+
+
+## setContents(contents) : File
+
+Method to configure the contents of a File instance. This is commenly used with `path` in order to give enough information for where contents is coming from.
+
+- **`contents`** { string | Buffer } - The file contents to configure for the File instance.
 
 
 ## setSrc(src) : File
