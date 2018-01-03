@@ -1,6 +1,6 @@
 {
   "name": "src-dest",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Helper for managing src and dest file paths",
   "main": "index.js",
   "scripts": {
