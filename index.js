@@ -34,6 +34,16 @@ function File(options, cwd) {
   configurator.configure(this, options);
 }
 
+File.prototype.setPath = function(path) {
+  this.path = path;
+  return this;
+};
+
+File.prototype.setContents = function(contents) {
+  this.contents = contents;
+  return this;
+};
+
 File.prototype.setSrc = function(files) {
   this.src = src(files, this.cwd, this.resolve);
   return this;
@@ -65,9 +75,7 @@ function src(files, cwd, resolve) {
 }
 
 function dest(file, cwd) {
-  return types.isString(file) ?
-    path.isAbsolute(file) ? file : path.join(cwd, file) :
-    file;
+  return types.isString(file) ? (path.isAbsolute(file) ? file : path.join(cwd, file)) : file;
 }
 
 module.exports = File;

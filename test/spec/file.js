@@ -31,6 +31,52 @@ describe("File unit test", function() {
     });
   });
 
+  describe("When creating a File with contents", function() {
+    const fileContents = "console.log('hello world')";
+
+    beforeEach(function() {
+      options = {
+        contents: fileContents
+      };
+      act();
+    });
+
+    it("then the file has no items in source", function() {
+      expect(result.src).to.have.lengthOf(0);
+    });
+
+    it("then the current directory contains src-dest", function() {
+      expect(result.cwd).to.contain("/src-dest");
+    });
+
+    it("then the file contents is what the file was configured with", function() {
+      expect(result.contents).to.equal(fileContents);
+    });
+  });
+
+  describe("When creating a File with a path", function() {
+    const filePath = "./some-random/path.js";
+
+    beforeEach(function() {
+      options = {
+        path: filePath
+      };
+      act();
+    });
+
+    it("then the file has no items in source", function() {
+      expect(result.src).to.have.lengthOf(0);
+    });
+
+    it("then the current directory contains src-dest", function() {
+      expect(result.cwd).to.contain("/src-dest");
+    });
+
+    it("then the file path is what the file was configured with", function() {
+      expect(result.path).to.equal(filePath);
+    });
+  });
+
   describe("When creating a File with only a string as the input", function() {
     beforeEach(function() {
       options = "test/spec/file.js";
