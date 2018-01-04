@@ -39,8 +39,8 @@ File.prototype.setPath = function(path) {
   return this;
 };
 
-File.prototype.setContents = function(contents) {
-  this.contents = contents;
+File.prototype.setContent = function(content) {
+  this.content = content;
   return this;
 };
 

@@ -31,12 +31,12 @@ describe("File unit test", function() {
     });
   });
 
-  describe("When creating a File with contents", function() {
-    const fileContents = "console.log('hello world')";
+  describe("When creating a File with content", function() {
+    const fileContent = "console.log('hello world')";
 
     beforeEach(function() {
       options = {
-        contents: fileContents
+        content: fileContent
       };
       act();
     });
@@ -49,8 +49,8 @@ describe("File unit test", function() {
       expect(result.cwd).to.contain("/src-dest");
     });
 
-    it("then the file contents is what the file was configured with", function() {
-      expect(result.contents).to.equal(fileContents);
+    it("then the file content is what the file was configured with", function() {
+      expect(result.content).to.equal(fileContent);
     });
   });
 
