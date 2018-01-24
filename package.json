@@ -4,7 +4,7 @@
   "description": "Helper for managing src and dest file paths",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --require babel-register"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
   "dependencies": {
     "belty": "^5.1.0",
     "dis-isa": "^1.3.0",
-    "glob": "^7.1.2",
-    "setopt": "^1.0.1"
+    "glob": "^7.1.2"
   }
 }

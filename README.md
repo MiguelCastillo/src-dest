@@ -57,7 +57,7 @@ console.log(file.src);
 import File from 'src-dest';
 
 const file = new File({
-  src: '**/*.js',
+  src: ['**/*.js', { content: 'console.log("hello world")', path: "/test" }],
   dest: './ouput.js'
 });
 
@@ -76,35 +76,19 @@ console.log(file.dest);
 Constructor to create file instances. A file instance contains an `src` property which is an array of full file paths. And a `dest` property which is also a full file path created when a `dest` is configured.
 
 - **`options`** { string | string[] | { src: string[], dest: string } } - Options can be a string or an array of strings. These strings are configured as the `src` file paths. Options can alternatively be an object with `src` and `dest`.
-  - **`options.src`** { string | string[] } - Source file paths. These can be globs.
+  - **`options.src`** { string | string[] | object | object[] } - When input is a string or array of string, they are processed as globs. Otherwise, data is stored as is.
   - **`options.dest`** { string } - Destination file path.
   - **`options.resolve`** { boolean } - Flag to disable glob resolution.
-  - **`options.path`** { string } - String path. Does not support glob resolution and so it is not affected by `resolve` flag.
-  - **`options.content`** { string | Buffer } - File content.
 - **`cwd`** { string } - Current working directory to resolve `src` files relative to. If one isn't provided then `process.cwd()` is used.
 
 > `src` file paths can be globs and are resolved relative to process.cwd() or `cwd` if that is provided. `dest` files are always resolved relative to process.cwd().
-
-
-## setPath(path) : File
-
-Method to configure the file `path`. `path` does not support glob resolution. For that, please use the `src` field instead. Furthermore, this is completely independent from `src`.
-
-- **`path`** { string } - File path to configure. Glob paths won't be resolved.
-
-
-## setContent(content) : File
-
-Method to configure the content of a File instance. This is commenly used with `path` in order to give enough information for where content is coming from.
-
-- **`content`** { string | Buffer } - The file content to configure for the File instance.
 
 
 ## setSrc(src) : File
 
 Method to configure `src` file paths.
 
-- **`src`** { string | string[] } - Source paths to be configured in the file instance. These can be globs.
+- **`src`** { string | string[] | object | object[] } - Source data to be configured in the file instance. These can strings, which are processed as globs. Otherwise, data is stored as is.
 
 
 ## setDest(dest) : File

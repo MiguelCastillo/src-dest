@@ -2,7 +2,6 @@ var glob = require("glob");
 var path = require("path");
 var types = require("dis-isa");
 var utils = require("belty");
-var configurator = require("setopt")();
 var processCwd = process.cwd();
 
 function File(options, cwd) {
@@ -27,31 +26,19 @@ function File(options, cwd) {
   cwd = options.cwd || cwd;
   cwd = cwd && path.isAbsolute(cwd) ? cwd : path.join(processCwd, cwd || "");
 
-  this.src = [];
-  this.dest = null;
-  this.cwd = cwd;
-  this.resolve = options.resolve;
-  configurator.configure(this, options);
+  Object.assign(this, options, {
+    cwd: cwd,
+    src: options.src ? src(options.src, cwd, options.resolve) : [],
+    dest: options.dest ? dest(options.dest, processCwd) : null
+  });
 }
 
-File.prototype.setPath = function(path) {
-  this.path = path;
-  return this;
-};
-
-File.prototype.setContent = function(content) {
-  this.content = content;
-  return this;
-};
-
 File.prototype.setSrc = function(files) {
-  this.src = src(files, this.cwd, this.resolve);
-  return this;
+  return new File(Object.assign({}, this, { src: files }));
 };
 
 File.prototype.setDest = function(file) {
-  this.dest = dest(file, processCwd);
-  return this;
+  return new File(Object.assign({}, this, { dest: file }));
 };
 
 function list(files, cwd) {
@@ -61,16 +48,18 @@ function list(files, cwd) {
 }
 
 function src(files, cwd, resolve) {
-  return utils.toArray(files).reduce(function(result, file) {
-    var globResult = types.isString(file) && resolve !== false ?
+  return utils.toArray(files).reduce(function(acc, file) {
+    var result = (
+      types.isString(file) && resolve !== false ?
       glob.sync(file, { cwd: cwd, realpath: true }) :
-      [file];
+      [file]
+    );
 
-    if (!globResult.length) {
+    if (!result.length) {
       throw new Error("File(s) not found: " + file);
     }
 
-    return result.concat(globResult);
+    return acc.concat(result);
   }, []);
 }
 
