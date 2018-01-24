@@ -57,7 +57,7 @@ console.log(file.src);
 import File from 'src-dest';
 
 const file = new File({
-  src: '**/*.js',
+  src: ['**/*.js', { content: 'console.log("hello world")', path: "/test" }],
   dest: './ouput.js'
 });
 
@@ -76,7 +76,7 @@ console.log(file.dest);
 Constructor to create file instances. A file instance contains an `src` property which is an array of full file paths. And a `dest` property which is also a full file path created when a `dest` is configured.
 
 - **`options`** { string | string[] | { src: string[], dest: string } } - Options can be a string or an array of strings. These strings are configured as the `src` file paths. Options can alternatively be an object with `src` and `dest`.
-  - **`options.src`** { string | string[] | object | object[] } - When input is a string or array of string, they are processed as globs. Otherwise they are stored as is.
+  - **`options.src`** { string | string[] | object | object[] } - When input is a string or array of string, they are processed as globs. Otherwise, data is stored as is.
   - **`options.dest`** { string } - Destination file path.
   - **`options.resolve`** { boolean } - Flag to disable glob resolution.
 - **`cwd`** { string } - Current working directory to resolve `src` files relative to. If one isn't provided then `process.cwd()` is used.
@@ -88,7 +88,7 @@ Constructor to create file instances. A file instance contains an `src` property
 
 Method to configure `src` file paths.
 
-- **`src`** { string | string[] } - Source paths to be configured in the file instance. These can be globs.
+- **`src`** { string | string[] | object | object[] } - Source data to be configured in the file instance. These can strings, which are processed as globs. Otherwise, data is stored as is.
 
 
 ## setDest(dest) : File
