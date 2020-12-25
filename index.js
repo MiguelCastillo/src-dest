@@ -29,7 +29,7 @@ function File(options, cwd) {
   Object.assign(this, options, {
     cwd: cwd,
     src: options.src ? src(options.src, cwd, options.resolve) : [],
-    dest: options.dest ? dest(options.dest, processCwd) : null
+    dest: options.dest ? dest(options.dest, cwd) : null
   });
 }
 
